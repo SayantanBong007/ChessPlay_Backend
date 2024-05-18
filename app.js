@@ -9,7 +9,14 @@ const AppError = require("./utils/AppError");
 // Create an instance of Express application
 const app = express();
 app.use(express.json());
-app.use(cors()); // Enable CORS for Express.js
+app.use(
+  cors({
+    origin: "https://chess-play-seven.vercel.app",
+    methods: ["GET", "POST"],
+    credentials: true,
+  })
+); // Enable CORS for Express.js
+
 app.use("/api/v1/match", matchRouter);
 
 // Create an HTTP server using the Express app
