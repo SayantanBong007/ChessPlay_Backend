@@ -26,7 +26,7 @@ const appServer = http.createServer(app);
 const io = socketIO(appServer, {
   cors: {
     origin: "https://chess-play-seven.vercel.app",
-    methods: ["GET", "POST"],
+    methods: ["GET", "POST", "PATCH", "PUT", "DELETE"],
     credentials: true,
   },
 });
