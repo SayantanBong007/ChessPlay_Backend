@@ -12,7 +12,7 @@ app.use(express.json());
 app.use(
   cors({
     origin: "https://chess-play-seven.vercel.app",
-    methods: ["GET", "POST"],
+    methods: ["GET", "POST", "PATCH", "PUT", "DELETE"],
     credentials: true,
   })
 ); // Enable CORS for Express.js
