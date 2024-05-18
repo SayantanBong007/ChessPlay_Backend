@@ -20,6 +20,7 @@ const io = socketIO(appServer, {
   cors: {
     origin: "https://chess-play-seven.vercel.app",
     methods: ["GET", "POST"],
+    credentials: true,
   },
 });
 
