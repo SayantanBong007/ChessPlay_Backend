@@ -1,9 +1,3 @@
-/**
- * This code sets up an Express application with CORS and Socket.IO configurations.
- * It includes routes for handling match-related requests and socket events for real-time communication.
- * The CORS settings are configured to allow requests from a specific origin.
- */
-
 const express = require("express");
 const http = require("http");
 const { Server } = require("socket.io");
@@ -15,14 +9,15 @@ const AppError = require("./utils/AppError");
 // Create an instance of Express application
 const app = express();
 app.use(express.json());
+
+// Enable CORS for Express.js with specific origin
 app.use(
   cors({
     origin: "https://chess-play-seven.vercel.app",
     methods: ["GET", "POST", "PATCH", "PUT", "DELETE"],
     credentials: true,
-    allowEIO3: true,
   })
-); // Enable CORS for Express.js
+);
 
 app.use("/api/v1/match", matchRouter);
 
@@ -33,7 +28,7 @@ const appServer = http.createServer(app);
 const io = new Server(appServer, {
   cors: {
     origin: "https://chess-play-seven.vercel.app",
-    methods: ["GET", "POST", "PATCH", "PUT", "DELETE"],
+    methods: ["GET", "POST"],
     credentials: true,
     allowEIO3: true,
   },
@@ -71,17 +66,7 @@ io.on("connection", (socket) => {
 
 // Middleware to handle undefined routes
 app.all("*", (req, res, next) => {
-  res.setHeader(
-    "Access-Control-Allow-Origin",
-    "https://chess-play-seven.vercel.app"
-  );
-  res.setHeader(
-    "Access-Control-Allow-Methods",
-    "GET, POST, PATCH, PUT, DELETE"
-  );
-  res.setHeader("Access-Control-Allow-Credentials", true);
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
-  next(new AppError(`this ${req.originalUrl} route not defined`, 404));
+  next(new AppError(`This ${req.originalUrl} route is not defined`, 404));
 });
 
 // Global error handler middleware
