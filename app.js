@@ -14,6 +14,7 @@ app.use(
     origin: "https://chess-play-seven.vercel.app",
     methods: ["GET", "POST", "PATCH", "PUT", "DELETE"],
     credentials: true,
+    allowEIO3: true,
   })
 ); // Enable CORS for Express.js
 
@@ -28,11 +29,14 @@ const io = socketIO(appServer, {
     origin: "https://chess-play-seven.vercel.app",
     methods: ["GET", "POST", "PATCH", "PUT", "DELETE"],
     credentials: true,
+    allowEIO3: true,
   },
 });
 
 // Socket.io event listeners
 io.on("connection", (socket) => {
+  console.log("a user connected");
+
   // Handle connection request from player
   socket.on("connection-req-from-player", (matchId, address) => {
     socket.to(matchId).emit("connection-req-from-player", matchId, address);
