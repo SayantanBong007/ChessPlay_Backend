@@ -70,7 +70,7 @@ io.on("connection", (socket) => {
 });
 
 // Middleware to handle undefined routes
-app.all("*", (req, res, next) => {
+app.all("*", cors(), (req, res, next) => {
   res.setHeader(
     "Access-Control-Allow-Origin",
     "https://chess-play-seven.vercel.app"
