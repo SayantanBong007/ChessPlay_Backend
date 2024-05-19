@@ -25,12 +25,13 @@ const appServer = http.createServer(app);
 
 // Create a socket.io server and configure CORS settings
 const io = socketIO(appServer, {
-  cors: {
-    origin: "https://chess-play-seven.vercel.app",
-    methods: ["GET", "POST", "PATCH", "PUT", "DELETE"],
-    credentials: true,
-    allowEIO3: true,
-  },
+  // cors: {
+  //   origin: "https://chess-play-seven.vercel.app",
+  //   methods: ["GET", "POST", "PATCH", "PUT", "DELETE"],
+  //   credentials: true,
+  //   allowEIO3: true,
+  // },
+  transports: ["websocket", "polling", "flashsocket"],
 });
 
 // Socket.io event listeners
