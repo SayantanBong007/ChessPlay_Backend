@@ -70,17 +70,21 @@ io.on("connection", (socket) => {
 });
 
 // Middleware to handle undefined routes
-app.all("*", cors(), (req, res, next) => {
-  res.setHeader(
-    "Access-Control-Allow-Origin",
-    "https://chess-play-seven.vercel.app"
-  );
-  res.setHeader(
-    "Access-Control-Allow-Methods",
-    "GET, POST, PATCH, PUT, DELETE"
-  );
-  res.setHeader("Access-Control-Allow-Credentials", true);
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+// app.all("*", cors(), (req, res, next) => {
+//   res.setHeader(
+//     "Access-Control-Allow-Origin",
+//     "https://chess-play-seven.vercel.app"
+//   );
+//   res.setHeader(
+//     "Access-Control-Allow-Methods",
+//     "GET, POST, PATCH, PUT, DELETE"
+//   );
+//   res.setHeader("Access-Control-Allow-Credentials", true);
+//   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+//   next(new AppError(`this ${req.originalUrl} route not defined`, 404));
+// });
+
+app.all("*", (req, res, next) => {
   next(new AppError(`this ${req.originalUrl} route not defined`, 404));
 });
 
